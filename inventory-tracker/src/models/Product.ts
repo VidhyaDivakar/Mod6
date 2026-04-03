@@ -1,6 +1,6 @@
 
 //creating product base class
-class Product { // Pascal Case convention for class names in typescript
+export class Product { // Pascal Case convention for class names in typescript
 sku: string;
 name: string;
 price: number;
@@ -17,7 +17,7 @@ getPriceWithTax(taxRate: number = 0.1): number {
 return this.price * (1 + taxRate);  
 }
 }
-module.exports = Product;
+
 
 const p1 = new Product("SKU123", "Laptop", 1000);
 console.log(p1.displayDetails());
