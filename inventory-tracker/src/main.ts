@@ -1,6 +1,6 @@
 import { PhysicalProduct } from "./models/PhysicalProduct";
 import { DigitalProduct } from "./models/DigitalProduct";
-import { taxCalculator } from "./utils/taxCalculator";
+import { calculatorTax } from "./utils/taxCalculator";
 
 const products = [
   new PhysicalProduct("SKU001", "Laptop", 1000, 2.5),
@@ -11,7 +11,7 @@ const products = [
 for (const product of products) {
   console.log(product.displayDetails());
 
-  const finalPrice = taxCalculator(product);
+  const finalPrice = calculateTax(product);
   console.log(`Final Price: $${finalPrice}`);
 
   // Type-specific details
