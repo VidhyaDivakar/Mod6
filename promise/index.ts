@@ -1,0 +1,6 @@
+// 
+fetchProductCatalog()
+
+fetchProductReviews(productId)
+
+ 
