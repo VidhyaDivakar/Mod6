@@ -1,6 +1,6 @@
 import { PhysicalProduct } from "./models/PhysicalProduct";
 import { DigitalProduct } from "./models/DigitalProduct";
-import { calculateTax } from "./utils/taxCalculator";
+import { calculatorTax } from "./utils/taxCalculator";
 
 const products = [
   new PhysicalProduct("SKU001", "Laptop", 1000, 2.5),
