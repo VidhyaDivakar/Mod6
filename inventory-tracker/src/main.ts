@@ -16,7 +16,7 @@ for (const product of products) {
 
   // Type-specific details
   if (product instanceof PhysicalProduct) {
-    console.log(`Weight: ${product.formattedWeight}`);
+    console.log(`Weight: ${product.formatWeight}`);
   }
 
   if (product instanceof DigitalProduct) {

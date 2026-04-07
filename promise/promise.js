@@ -1,68 +1,67 @@
-const greetingPromise = new Promise ((resolve, reject) => {
-    console.log("Hello good to see you!, can I come In");
-setTimeout(() => {
-    resolve("Welcome to the party!");
-}, 5000);
-});
-    
-greetingPromise.then((message) => {
-    console.log(message);
-})
-
-// ASYNC/AWAIT EXAMPLE
-// New Hotness
-function welcomeHome(){
-    return new Promise((resolve)=>{
-        console.log("Welcome to my house!")
-
-        setTimeout(()=>{
-            resolve("*looks around in awe* Happy to Be here!");
-        }, 10000)
-    });
-};
-
-async function run(){
-    const welcomeMessage = await welcomeHome();
-    console.log(welcomeMessage)
-}
-
-run();
-
-//Example: Creating Promises
-//Here is a basic example of a Promise that simulates a delay using setTimeout, similar to the wait() function
-// const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
-
-// wait(1000).then(() => console.log("Done waiting!"));
-
-
-// More Detailed promise - Chaining Stuff!
-// Scenario: Checking in a hotel
-function checkIn(message, time) {
-    return new Promise((resolve)=>{
+"use strict";
+//Chained Promise with TS
+Object.defineProperty(exports, "__esModule", { value: true });
+function hotelWelcome(message, time) {
+    return new Promise((resolve) => {
         setTimeout(() => {
             console.log(message);
-            resolve();
-        }, time)
-    })
+            resolve(message);
+        }, time);
+    });
 }
-checkIn("Welcome to the Fancy Hotel!", "We are getting your room ready, please wait a moment", 2000)
-.then(()=>{
-    return checkIn("Your room is ready!", "Here is your key card, enjoy your stay!", 2000);
+hotelWelcome("Welcome to our hotel!", 1000)
+    .then(() => {
+    return hotelWelcome("Your room is ready!", 2000);
 })
-
-
-// function orderFood(message, time) {
-//     return new Promise((resolve)=>{
-//         setTimeout(() => {
-//             console.log(message);
-//             resolve();
-//         }, time)
-// })
-// }
-// orderFood("Welcome to the restaurant!", "We are preparing your meal, please wait a moment", 5000)
-// .then(()=>{
-//     return orderFood("Your meal is ready!", "Here is your food, enjoy your meal!", 5000);
-// })
-// .then(()=>{
-//     return orderFood("Would you like dessert?", "We have a delicious selection of desserts, please wait a moment", 5000);
-// })
+    .then(() => {
+    return hotelWelcome("Enjoy your stay!", 2000);
+});
+// Error Handling with Promises
+function rentalAvailabilityCheck(FullyBooked) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (FullyBooked) {
+                reject("Sorry, we are fully booked.");
+            }
+            else {
+                resolve("Great news! We have rooms available.");
+            }
+        }, 3000);
+    });
+}
+const fullyBooked = true; // change to false to see the success case
+rentalAvailabilityCheck(fullyBooked)
+    .then((message) => {
+    console.log(message);
+})
+    .catch((error) => {
+    console.error(error);
+});
+// Error Promise Function
+function fullCityCheck(ifFull) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (ifFull) {
+                reject("Sorry, the city is fully booked.");
+            }
+            else {
+                resolve("Great news! We have availability in the city.");
+            }
+        }, 2000);
+    });
+}
+const cityFullyBooked = true;
+fullCityCheck(cityFullyBooked)
+    .then((message) => {
+    console.log(message);
+})
+    .catch((error) => {
+    if (error instanceof Error) {
+        console.error(error.message);
+    }
+    else {
+        console.error("An unknown error occurred.");
+    }
+    console.error(error);
+});
+//# sourceMappingURL=promise.js.map
