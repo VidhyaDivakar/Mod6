@@ -1,6 +1,6 @@
 //Function fetchProductCatalog
 export const fetchProductCatalog = (): Promise<{ id: number; name: string; price: number }[]> => { //using <> to define the type of data
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { // for the aynch operation we use new promise
     setTimeout(() => {
         if (Math.random() < 0.8) {
         resolve([
@@ -15,20 +15,35 @@ export const fetchProductCatalog = (): Promise<{ id: number; name: string; price
 };
 
 //fetchProductReviews()
-export const fetchProductReviews = (productId: number): Promise<{ id: number; userName: string; comment: string; rating: number }[]> => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (Math.random() < 0.8) {
-                resolve([
-                    { id: 1, userName: "Alice", comment: "Great product!", rating: 5 },
-                    { id: 2, userName: "Bob", comment: "Good value for money.", rating: 4 },
-                ]);
-            } else {
-                reject("Failed to fetch product reviews");
-            }
-        }, 1000);
-    });
+export const fetchProductReviews = (
+  productId: number
+): Promise<
+  { reviewId: number; productId: number; rating: number; comment: string }[]
+> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() < 0.85) {
+        resolve([
+          {
+            reviewId: 1, productId, rating: 5,
+            comment: "You can trust this product!",
+          },
+          {
+            reviewId: 2, productId, rating: 4,
+            comment: "Very good, but could be improved slightly.",
+          },
+          {
+            reviewId: 3, productId, rating: 3,
+            comment: "Average experience, works as expected.",
+          },
+        ]);
+      } else {
+        reject(`Failed to fetch reviews for product ID ${productId}`);
+      }
+    }, 1500); // Added 1.5 seconds delay
+  });
 };
 
 //fetchSalesReport
+
 //Ttotal dcles
