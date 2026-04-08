@@ -2,7 +2,7 @@
 import { fetchProductCatalog } from "./apiSimulator";
 import { fetchProductReviews } from "./apiSimulator";
 import { fetchSalesReport } from "./apiSimulator";
-
+import { NetworkError, DataError } from "./apiSimulator";
 // function to handle the entire flow of API calls
 const apiCall = () => {
     fetchProductCatalog().then((products) => { // first we fetch the product catalog, then we handle the reviews and sales report in the .then() chain
@@ -34,11 +34,18 @@ const apiCall = () => {
             console.log(report);
         })
         .catch((error) => {
-            console.error("Error in application flow:", error);
+            if (error instanceof NetworkError) {
+                console.error("Network issue:", error.message);
+            } else if (error instanceof DataError) {
+                console.error("Data issue:", error.message);
+            } else {
+                console.error("Unknown error:", error);
+            }
         })
         .finally(() => {
             console.log("All API calls have been attempted.");
         });
-};
 
-apiCall();
+
+    apiCall();
+}
