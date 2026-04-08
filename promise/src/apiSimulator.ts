@@ -1,4 +1,4 @@
-//Function fetchProductCatalog
+//Function fetchProductCatalog with id, name, price parameters
 export const fetchProductCatalog = (): Promise<{ id: number; name: string; price: number }[]> => { //using <> to define the type of data
     return new Promise((resolve, reject) => { // for the aynch operation we use new promise
         setTimeout(() => {
@@ -58,4 +58,3 @@ export const fetchSalesReport = (): Promise<{ totalSales: number; unitSold: numb
     });
 };
 
-//Ttotal dcles

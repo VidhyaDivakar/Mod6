@@ -1,11 +1,44 @@
-//fetchProductCatalog()
-fetchProductCatalog()
-    .then((products) => {
-        console.log("Product Catalog:");
-        products.forEach((product) => {
-            console.log(`- ${product.name}: $${product.price}`);
+//fetchProductCatalog() to fetch product details and display them in console
+import { fetchProductCatalog } from "./apiSimulator";
+import { fetchProductReviews } from "./apiSimulator";
+import { fetchSalesReport } from "./apiSimulator";
+
+// function to handle the entire flow of API calls
+const apiCall = () => {
+    fetchProductCatalog().then((products) => { // first we fetch the product catalog, then we handle the reviews and sales report in the .then() chain
+        console.log("Product Catalog:"); // we get the products in array
+        console.log(products);
+
+        // Fetching reviews for each product from fetchProductReviews()
+        const reviewPromises = products.map((product) => { // map creates new array of promise
+            return fetchProductReviews(product.id)
+                .then((reviews) => {
+                    console.log(`Reviews for ${product.name}:`);
+                    console.log(reviews);
+                })
+                .catch((error) => {
+                    console.error(
+                        `Fetching the errors for product ID ${product.id}:`,
+                        error
+                    );
+                });
         });
+
+        return Promise.all(reviewPromises);
     })
-    .catch((error) => {
-        console.error("Error fetching product catalog:", error);
-    });
+        .then(() => {
+            return fetchSalesReport();
+        })
+        .then((report) => {
+            console.log("Sales Report:");
+            console.log(report);
+        })
+        .catch((error) => {
+            console.error("Error in application flow:", error);
+        })
+        .finally(() => {
+            console.log("All API calls have been attempted.");
+        });
+};
+
+apiCall();
