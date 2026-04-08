@@ -1,6 +1,5 @@
-//Lab File 1
-fetchProductCatalog
-export const fetchProductCatalog = (): Promise<{ id: number; name: string; price: number }[]> => {
+//Function fetchProductCatalog
+export const fetchProductCatalog = (): Promise<{ id: number; name: string; price: number }[]> => { //using <> to define the type of data
     return new Promise((resolve, reject) => {
     setTimeout(() => {
         if (Math.random() < 0.8) {
